@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       `INSERT INTO rides (passenger_id, pickup_address, pickup_lat, pickup_lng, dropoff_address, dropoff_lat, dropoff_lng, fare, distance_km, estimated_time, status)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 'requested')
        RETURNING *`,
-      [session.userId, pickupAddress, pickupLat, pickupLng, dropoffAddress, dropoffLat, dropoffLng, Math.round(fare * 100) / 100, distanceKm, estimatedTime]
+      [session.userId as string, pickupAddress, pickupLat, pickupLng, dropoffAddress, dropoffLat, dropoffLng, Math.round(fare * 100) / 100, distanceKm, estimatedTime]
     );
 
     return NextResponse.json({ ride: result[0] });
@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
       LEFT JOIN users u ON r.driver_id = u.id
       WHERE r.passenger_id = $1
     `;
-    const params: unknown[] = [session.userId];
+    const params: (string | number | null)[] = [session.userId as string];
 
     if (status) {
       queryText += ' AND r.status = $2';

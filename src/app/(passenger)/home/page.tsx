@@ -37,18 +37,17 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 pb-20">
       <header className="bg-black text-white p-4">
         <div className="max-w-lg mx-auto flex justify-between items-center">
           <h1 className="text-xl font-bold">UBER</h1>
           <button 
-            onClick={async () => {
-              await fetch('/api/auth/logout', { method: 'POST' });
-              router.push('/login');
-            }}
-            className="text-sm hover:underline"
+            onClick={() => router.push('/profile')}
+            className="p-2"
           >
-            Cerrar sesión
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
           </button>
         </div>
       </header>
@@ -99,6 +98,38 @@ export default function HomePage() {
           ))}
         </div>
       </main>
+
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+        <div className="max-w-lg mx-auto flex justify-around py-2">
+          <button 
+            onClick={() => router.push('/home')}
+            className="flex flex-col items-center p-2 text-black"
+          >
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <span className="text-xs mt-1">Inicio</span>
+          </button>
+          <button 
+            onClick={() => router.push('/history')}
+            className="flex flex-col items-center p-2 text-gray-500"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span className="text-xs mt-1">Viajes</span>
+          </button>
+          <button 
+            onClick={() => router.push('/profile')}
+            className="flex flex-col items-center p-2 text-gray-500"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            <span className="text-xs mt-1">Perfil</span>
+          </button>
+        </div>
+      </nav>
     </div>
   );
 }

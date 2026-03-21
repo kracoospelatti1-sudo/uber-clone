@@ -24,7 +24,7 @@ export async function GET(
        LEFT JOIN users d ON r.driver_id = d.id
        LEFT JOIN driver_profiles dp ON d.id = dp.user_id
        WHERE r.id = $1 AND (r.passenger_id = $2 OR r.driver_id = $2)`,
-      [id, session.userId]
+      [id, session.userId as string]
     );
 
     if (result.length === 0) {
@@ -69,11 +69,11 @@ export async function PATCH(
           return NextResponse.json({ error: 'Ride cannot be accepted' }, { status: 400 });
         }
         updateQuery = `UPDATE rides SET driver_id = $1, status = 'accepted', accepted_at = $2 WHERE id = $3 RETURNING *`;
-        const acceptResult = await query(updateQuery, [session.userId, now, id]);
+        const acceptResult = await query(updateQuery, [session.userId as string, now, id]);
         return NextResponse.json({ ride: acceptResult[0] });
 
       case 'start':
-        if (ride.driver_id !== session.userId || ride.status !== 'accepted') {
+        if (ride.driver_id !== (session.userId as string) || ride.status !== 'accepted') {
           return NextResponse.json({ error: 'Cannot start ride' }, { status: 400 });
         }
         updateQuery = `UPDATE rides SET status = 'started', started_at = $1 WHERE id = $2 RETURNING *`;
@@ -81,7 +81,7 @@ export async function PATCH(
         return NextResponse.json({ ride: startResult[0] });
 
       case 'complete':
-        if (ride.driver_id !== session.userId || ride.status !== 'started') {
+        if (ride.driver_id !== (session.userId as string) || ride.status !== 'started') {
           return NextResponse.json({ error: 'Cannot complete ride' }, { status: 400 });
         }
         updateQuery = `UPDATE rides SET status = 'completed', completed_at = $1 WHERE id = $2 RETURNING *`;
