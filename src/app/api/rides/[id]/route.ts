@@ -88,7 +88,7 @@ export async function PATCH(
         const completeResult = await query(updateQuery, [now, id]);
         
         await query(
-          `INSERT INTO payments (ride_id, passenger_id, amount, status) VALUES ($1, $2, $3, 'completed')`,
+          `INSERT INTO payments (ride_id, passenger_id, amount, payment_method, status) VALUES ($1, $2, $3, 'cash', 'completed')`,
           [id, ride.passenger_id, ride.fare]
         );
         

@@ -3,7 +3,7 @@ import { getSession } from '@/lib/auth';
 import { query } from '@/lib/db';
 import type { Report } from '@/types';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const session = await getSession();
     if (!session || !session.userId) {
@@ -14,7 +14,7 @@ export async function GET() {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
-    const { searchParams } = new URL(new URL('', 'http://localhost'));
+    const { searchParams } = new URL(request.url);
     const status = searchParams.get('status');
 
     let queryText = `

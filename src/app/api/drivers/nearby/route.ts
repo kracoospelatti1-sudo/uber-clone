@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
       `SELECT dp.*, u.full_name, u.rating, u.phone
        FROM driver_profiles dp
        JOIN users u ON dp.user_id = u.id
-       WHERE dp.is_available = true AND dp.verified = true
+       WHERE dp.is_available = true AND dp.verification_status = 'approved'
        LIMIT 10`
     );
 

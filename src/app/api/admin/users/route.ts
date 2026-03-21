@@ -32,7 +32,8 @@ export async function GET(request: NextRequest) {
 
     if (search) {
       params.push(`%${search}%`);
-      queryText += ` AND (full_name ILIKE $${params.length} OR email ILIKE $${params.length})`;
+      params.push(`%${search}%`);
+      queryText += ` AND (full_name ILIKE $${params.length - 1} OR email ILIKE $${params.length})`;
     }
 
     queryText += ' ORDER BY created_at DESC';
