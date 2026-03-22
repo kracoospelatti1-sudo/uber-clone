@@ -335,7 +335,7 @@ export default function DriverDashboard() {
                           </div>
                         )}
                         {rating.comment && (
-                          <p className="text-sm text-gray-600 italic">"{rating.comment}"</p>
+                          <p className="text-sm text-gray-600 italic">&quot;{rating.comment}&quot;</p>
                         )}
                       </div>
                     );

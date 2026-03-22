@@ -61,7 +61,7 @@ export async function PATCH(
 
     const ride = rideResult[0];
     let updateQuery = '';
-    let now = new Date().toISOString();
+    const now = new Date().toISOString();
 
     switch (action) {
       case 'accept':

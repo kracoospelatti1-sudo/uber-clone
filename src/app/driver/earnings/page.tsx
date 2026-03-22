@@ -44,7 +44,7 @@ export default function DriverEarningsPage() {
         const rides = ridesData.rides || [];
         setStats({
           total_rides: rides.length,
-          total_earnings: rides.reduce((sum: number, r: any) => sum + (r.fare || 0), 0),
+          total_earnings: rides.reduce((sum: number, r: { fare?: number }) => sum + (r.fare || 0), 0),
           rating: 5.0,
         });
       }
