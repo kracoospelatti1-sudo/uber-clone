@@ -79,8 +79,11 @@ export default function RideSummaryPage() {
     );
   }
 
-  const distanceCharge = (ride.distance_km || 0) * DISTANCE_RATE;
-  const timeCharge = (ride.estimated_time || 0) * TIME_RATE;
+  const fare = Number(ride.fare || 0);
+  const distanceKm = Number(ride.distance_km || 0);
+  const estimatedTime = Number(ride.estimated_time || 0);
+  const distanceCharge = distanceKm * DISTANCE_RATE;
+  const timeCharge = estimatedTime * TIME_RATE;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -99,7 +102,7 @@ export default function RideSummaryPage() {
         {/* Big fare card */}
         <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
           <p className="text-sm text-gray-500 mb-1">Total pagado</p>
-          <p className="text-5xl font-bold mb-1">${ride.fare?.toFixed(2)}</p>
+          <p className="text-5xl font-bold mb-1">${fare.toFixed(2)}</p>
           {ride.requested_at && (
             <p className="text-sm text-gray-400">{formatDate(ride.requested_at)}</p>
           )}
@@ -108,9 +111,9 @@ export default function RideSummaryPage() {
         {/* Trip stats */}
         <div className="grid grid-cols-3 gap-3">
           {[
-            { label: 'Distancia', value: ride.distance_km ? `${ride.distance_km} km` : '—', icon: '📍' },
+            { label: 'Distancia', value: distanceKm > 0 ? `${distanceKm.toFixed(1)} km` : '—', icon: '📍' },
             { label: 'Duración', value: formatDuration(ride.requested_at, ride.completed_at), icon: '⏱️' },
-            { label: 'Tarifa/km', value: ride.distance_km ? `$${(ride.fare / ride.distance_km).toFixed(1)}` : '—', icon: '💰' },
+            { label: 'Tarifa/km', value: distanceKm > 0 ? `$${(fare / distanceKm).toFixed(1)}` : '—', icon: '💰' },
           ].map(({ label, value, icon }) => (
             <div key={label} className="bg-white rounded-xl shadow p-4 text-center">
               <p className="text-2xl mb-1">{icon}</p>
@@ -152,15 +155,15 @@ export default function RideSummaryPage() {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Distancia ({ride.distance_km || 0} km × ${DISTANCE_RATE})</span>
-              <span className="font-medium">${distanceCharge.toFixed(2)}</span>
+              <span className="font-medium">${Number(distanceCharge).toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Tiempo ({ride.estimated_time || 0} min × ${TIME_RATE})</span>
-              <span className="font-medium">${timeCharge.toFixed(2)}</span>
+              <span className="font-medium">${Number(timeCharge).toFixed(2)}</span>
             </div>
             <div className="flex justify-between pt-2 border-t border-gray-100 font-bold">
               <span>Total</span>
-              <span>${ride.fare?.toFixed(2)}</span>
+              <span>${fare.toFixed(2)}</span>
             </div>
           </div>
         </div>

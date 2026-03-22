@@ -89,7 +89,7 @@ export default function DriverRequestsPage() {
                     <p className="font-semibold">{ride.passenger_name}</p>
                     <p className="text-sm text-gray-500">{ride.passenger_phone}</p>
                   </div>
-                  <span className="text-2xl font-bold text-green-600">${ride.fare?.toFixed(2)}</span>
+                  <span className="text-2xl font-bold text-green-600">${Number(ride.fare).toFixed(2)}</span>
                 </div>
 
                 <div className="space-y-2 mb-4">
@@ -104,7 +104,7 @@ export default function DriverRequestsPage() {
                 </div>
 
                 <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
-                  <span>{ride.distance_km?.toFixed(1)} km</span>
+                  <span>{ride.distance_km ? Number(ride.distance_km).toFixed(1) : '—'} km</span>
                   <span>{new Date(ride.requested_at).toLocaleTimeString()}</span>
                 </div>
 

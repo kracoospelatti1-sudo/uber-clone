@@ -206,12 +206,12 @@ export default function DriverDashboard() {
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-white rounded-xl shadow p-4">
               <p className="text-xs text-gray-400 uppercase tracking-wide">Hoy</p>
-              <p className="text-2xl font-bold text-green-600 mt-1">${stats.today_earnings.toFixed(0)}</p>
+              <p className="text-2xl font-bold text-green-600 mt-1">${Number(stats.today_earnings).toFixed(0)}</p>
               <p className="text-xs text-gray-500 mt-0.5">{stats.rides_today} viaje{stats.rides_today !== 1 ? 's' : ''}</p>
             </div>
             <div className="bg-white rounded-xl shadow p-4">
               <p className="text-xs text-gray-400 uppercase tracking-wide">Esta semana</p>
-              <p className="text-2xl font-bold text-green-600 mt-1">${stats.week_earnings.toFixed(0)}</p>
+              <p className="text-2xl font-bold text-green-600 mt-1">${Number(stats.week_earnings).toFixed(0)}</p>
               <p className="text-xs text-gray-500 mt-0.5">{stats.rides_week} viaje{stats.rides_week !== 1 ? 's' : ''}</p>
             </div>
             <div className="bg-white rounded-xl shadow p-4">

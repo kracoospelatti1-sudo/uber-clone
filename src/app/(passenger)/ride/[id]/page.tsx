@@ -215,7 +215,7 @@ export default function PassengerRidePage() {
             </div>
             <div className="text-right">
               <p className="text-sm text-gray-500">Tarifa</p>
-              <p className="text-2xl font-bold">${ride.fare?.toFixed(2)}</p>
+              <p className="text-2xl font-bold">${Number(ride.fare).toFixed(2)}</p>
             </div>
           </div>
 

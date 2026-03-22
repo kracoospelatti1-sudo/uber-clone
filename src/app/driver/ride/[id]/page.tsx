@@ -182,7 +182,7 @@ export default function DriverRidePage() {
               </div>
             </div>
             <div className="text-right">
-              <p className="text-3xl font-bold text-green-600">${ride.fare?.toFixed(2)}</p>
+              <p className="text-3xl font-bold text-green-600">${Number(ride.fare).toFixed(2)}</p>
               {ride.distance_km && (
                 <p className="text-sm text-gray-400">{ride.distance_km} km</p>
               )}
@@ -260,7 +260,7 @@ export default function DriverRidePage() {
             <h2 className="text-2xl font-bold mb-1">¡Viaje completado!</h2>
             <p className="text-gray-500 mb-4">Ganaste en este viaje</p>
             <div className="bg-green-50 rounded-2xl p-6 mb-4">
-              <p className="text-5xl font-bold text-green-600">${ride.fare?.toFixed(2)}</p>
+              <p className="text-5xl font-bold text-green-600">${Number(ride.fare).toFixed(2)}</p>
               <div className="flex justify-center gap-6 mt-3 text-sm text-gray-500">
                 {ride.distance_km && <span>📍 {ride.distance_km} km</span>}
                 {ride.estimated_time && <span>⏱ {ride.estimated_time} min</span>}

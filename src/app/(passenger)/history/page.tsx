@@ -101,7 +101,7 @@ export default function HistoryPage() {
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusBadge(ride.status)}`}>
                       {ride.status}
                     </span>
-                    <span className="font-bold text-lg">${ride.fare?.toFixed(2)}</span>
+                    <span className="font-bold text-lg">${Number(ride.fare).toFixed(2)}</span>
                   </div>
                   <div className="space-y-1 text-sm">
                     <div className="flex items-start gap-2">
@@ -115,7 +115,7 @@ export default function HistoryPage() {
                   </div>
                   <div className="flex justify-between items-center mt-3 pt-3 border-t text-xs text-gray-500">
                     <span>{formatDate(ride.requested_at)}</span>
-                    <span>{ride.distance_km?.toFixed(1)} km</span>
+                    <span>{ride.distance_km ? Number(ride.distance_km).toFixed(1) : '—'} km</span>
                   </div>
                 </div>
               </Link>
